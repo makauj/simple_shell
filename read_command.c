@@ -8,18 +8,23 @@
 
 char *read_command(void)
 {
-	char buffer = NULL;
+	char *buffer = NULL;
 	size_t bufsize = 0;
 	char *command;
 	size_t len;
 
-	if (getline(&buffer, &bufsize, stdin) == -1)
+	len = getline(&buffer, &bufsize, stdin);
+	if (len == -1)
 	{
+		/** 
+		 * We should consider changing 'buffer'to
+		 * something else. It may cause confusion later on.
+		 */
+		free(buffer);/* Free memory allocated to buffer on failure */
 		return (NULL); /* Return NULL to indicate EOF or error */
 	}
 
 	/* Remove the newline character from the buffer, if present */
-	len = strlen(buffer);
 	if (len > 0 && buffer[len - 1] == '\n')
 	{
 		buffer[len - 1] = '\0';
@@ -29,10 +34,20 @@ char *read_command(void)
 	command = malloc(len);
 	if (command == NULL)
 	{
+		free(buffer);
 		handle_error("malloc");
 		exit(EXIT_FAILURE);
 	}
 
 	strcpy(command, buffer);
+
+	free(buffer);
 	return (command);
 }
+/**
+ * I noticed I had not properly handled memory allocation
+ * so I added free buffer where relevant.
+ * Also noticed that len was not properly initiated. This helped remove 
+ * strlen so we only need to handle strcpy.
+ *
+ * /
