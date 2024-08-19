@@ -9,6 +9,8 @@
 #include <sys/types.h>
 #include <string.h>
 #include <errno.h>
+
+
 char *_strcpy(char *dest, char *src);
 int print_string(char *str);
 int _putchar(char c);
