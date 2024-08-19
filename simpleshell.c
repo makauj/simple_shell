@@ -18,11 +18,11 @@ int main(void)
 		if (command == NULL)
 		{
 			/* Handle end-of-file (Ctrl+D) */
-			printf("\n");
+			print_string("\n");
 			exit(EXIT_SUCCESS);
 		}
 		/* Ignore empty commands */
-		if (strlen(command) > 0)
+		if (_strlen(command) > 0)
 		{
 			execute_command(command);
 		}

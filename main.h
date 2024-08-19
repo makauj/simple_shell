@@ -9,7 +9,10 @@
 #include <sys/types.h>
 #include <string.h>
 #include <errno.h>
-
+char *_strcpy(char *dest, char *src);
+int print_string(char *str);
+int _putchar(char c);
+int _strlen(char *s);
 void display_prompt(void);
 char *read_command(void);
 void execute_command(char *command);

@@ -8,4 +8,4 @@
 void handle_error(const char *msg)
 {
 	perror(msg);
-}i
+}

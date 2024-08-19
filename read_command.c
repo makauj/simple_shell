@@ -39,7 +39,7 @@ char *read_command(void)
 		exit(EXIT_FAILURE);
 	}
 
-	strcpy(command, buffer);
+	_strcpy(command, buffer);
 
 	free(buffer);
 	return (command);
@@ -50,4 +50,4 @@ char *read_command(void)
  * Also noticed that len was not properly initiated. This helped remove 
  * strlen so we only need to handle strcpy.
  *
- * /
+ */
