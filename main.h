@@ -9,7 +9,6 @@
 #include <sys/types.h>
 #include <string.h>
 #include <errno.h>
-<<<<<<< HEAD
 typedef struct bin
 {
 	char *dir;
@@ -19,10 +18,7 @@ void free_node(bin *head);
 char *search_command(char *command);
 bin *create_node(void);
 char *_strcat(char *dest, char *src);
-=======
 
-
->>>>>>> 976225ace36225b54cd7419a7156f0601e458372
 char *_strcpy(char *dest, char *src);
 char *get_command(void);
 int print_string(char *str);
