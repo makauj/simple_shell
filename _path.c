@@ -28,6 +28,22 @@ char *command_path(const char *command)
 		handle_error("strdup");
 		exit(EXIT_FAILURE);
 	}
+	
+	if (command[0] == '/' || command[0] == '.')
+	{
+		if (stat(command, &sb) == 0)
+		{
+			if (S_ISREG(sb.st_mode))
+			{
+				if (sb.st_mode & S_IXUSR)
+				{
+					return (strdup(command));
+				}
+			}
+		}
+		return (NULL); /* Command not found */
+	}
+
 	dir = strtok(path_cpy, ":");
 	while (dir != NULL)
 	{
@@ -48,9 +64,9 @@ char *command_path(const char *command)
 
 		if (stat(fp, &sb) == 0)
 		{
-			if (S_ISEREG(sb.st_mode))
+			if (S_ISREG(sb.st_mode))
 			{
-				if ((sb.st_mode & SIXUSR))
+				if ((sb.st_mode & S_IXUSR))
 				{
 					free(path_cpy);
 					return (strdup(fp));
