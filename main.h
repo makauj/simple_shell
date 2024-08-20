@@ -14,6 +14,8 @@ typedef struct bin
 	char *dir;
 	struct bin *next;
 } bin;
+
+
 void free_node(bin *head);
 char *search_command(char *command);
 bin *create_node(void);
