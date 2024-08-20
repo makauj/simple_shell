@@ -12,18 +12,18 @@ char *command_path(const char *command)
 	char *path = getenv("PATH");
 	char *path_cpy;
 	char *dir;
-	char fullpath[BUFFER_SIZE];
+	char fp[BUFFER_SIZE];
+	size_t dir_len, cmd_len, total_len;
+	struct stat sb;
 
-	struct stat statbuf;
-
-	if (path = NULL)
+	if (path == NULL)
 	{
 		handle_error("getenv");
 		exit(EXIT_FAILURE);
 	}
 
 	path_cpy = strdup(path);
-	if (path_cpy = NULL)
+	if (path_cpy == NULL)
 	{
 		handle_error("strdup");
 		exit(EXIT_FAILURE);
@@ -31,17 +31,31 @@ char *command_path(const char *command)
 	dir = strtok(path_cpy, ":");
 	while (dir != NULL)
 	{
-		snprintf(full_path, sizeof(full_path), %s%s, dir, command);
-		if (stat(full_path, &statbuf) == 0)
+		dir_len = strlen(dir);
+		cmd_len = strlen(command);
+		total_len = dir_len + cmd_len + 2;
+
+		if (total_len >= sizeof(fp))
 		{
-		       if (S_ISEREG(ststbuf.st_mode))
-		       {
-			      if ((statbuf.st_mode & SIXUSR))
-			      {
-				      free(path_cpy);
-				      return (strdup(full_path));
-			      }
-		       }
+			dir = strtok(NULL, ":");
+			continue;
+		}
+
+		memcpy(fp, dir, dir_len);
+		fp[dir_len] = '/';
+		memcpy(fp + dir_len + 1, command, cmd_len);
+		fp[total_len - 1] = '\0';
+
+		if (stat(fp, &sb) == 0)
+		{
+			if (S_ISEREG(sb.st_mode))
+			{
+				if ((sb.st_mode & SIXUSR))
+				{
+					free(path_cpy);
+					return (strdup(fp));
+				}
+			}
 		}
 		dir = strtok(NULL, ":");
 	}
