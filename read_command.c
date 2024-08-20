@@ -16,7 +16,7 @@ char *read_command(void)
 	len = getline(&buffer, &bufsize, stdin);
 	if (len == -1)
 	{
-		/** 
+		/**
 		 * We should consider changing 'buffer'to
 		 * something else. It may cause confusion later on.
 		 */
@@ -47,7 +47,7 @@ char *read_command(void)
 /**
  * I noticed I had not properly handled memory allocation
  * so I added free buffer where relevant.
- * Also noticed that len was not properly initiated. This helped remove 
+ * Also noticed that len was not properly initiated. This helped remove
  * strlen so we only need to handle strcpy.
  *
  */
