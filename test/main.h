@@ -9,6 +9,9 @@
 #include <sys/types.h>
 #include <string.h>
 #include <errno.h>
+#include <ctype.h>
+#include <limits.h>
+
 typedef struct bin
 {
 	char *dir;
@@ -29,13 +32,19 @@ char *read_command(void);
 void execute_command(char *command);
 void handle_error(const char *msg);
 char *command_path(const char *command);
+char *_strtok(char *str, const char *delim);
 int _strtol(const char *str, int *value);
+char *_strchr(const char *str, int c);
+int _builtins(void);
+void _exit(char **args);
+void _cd(char **args);
+
 
 #define PROMPT "#C is fun$ "
 #define BUFFER_SIZE 1024
 #define MAX_ARGS 100
 
-extern char **environ; /* pass environment variables to execve */
+	extern char **environ; /* pass environment variables to execve */
 
 struct builtin
 {
@@ -45,6 +54,7 @@ struct builtin
 
 struct builtin builtins[] = {
 	{"exit", _exit},
-	{"cd", _cd}};
+	{"cd", _cd}
+};
 
 #endif /* __MAIN_H__ */

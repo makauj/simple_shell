@@ -14,18 +14,18 @@ void execute_command(char *command)
 	int argc = 0;
 	char *path;
 
-	argv[argc] = strtok(command, " ");
+	argv[argc] = _strtok(command, " ");
 	while (argv[argc] != NULL && argc < MAX_ARGS - 1)
 	{
 		argc++;
-		argv[argc] = strtok(NULL, " ");
+		argv[argc] = _strtok(NULL, " ");
 	}
 	argv[argc] = NULL; /*NULL terminate argument list*/
 
 	path = search_command(argv[0]);
 	if (path == NULL)
 	{
-		perror("path");
+		write(STDERR_FILENO, "Command not found\n", 10);
 		return;
 	}
 	if (argv[0] == NULL)
@@ -34,7 +34,7 @@ void execute_command(char *command)
 	}
 	if (pid < 0)
 	{
-		handle_error("fork");
+		write(STDERR_FILENO, "Fork failed\n", 12);
 		return;
 	}
 	else if (pid == 0)
@@ -42,15 +42,15 @@ void execute_command(char *command)
 		/* Child process */
 		execve(path, argv, envp);
 		/* If execvp returns, there was an error */
-		handle_error("execve");
-		exit(EXIT_FAILURE);
+		write(STDERR_FILENO, "Execution failed\n", 18);
+		_exit(EXIT_FAILURE);
 	}
 	else
 	{
 		/* Parent process */
 		if (waitpid(pid, &status, 0) < 0)
 		{
-			handle_error("waitpid");
+			write(STDERR_FILENO, "Waitpid failed\n", 15);
 		}
 	}
 	free(path);

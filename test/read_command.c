@@ -16,10 +16,6 @@ char *read_command(void)
 	len = getline(&buffer, &bufsize, stdin);
 	if (len == -1)
 	{
-		/**
-		 * We should consider changing 'buffer'to
-		 * something else. It may cause confusion later on.
-		 */
 		free(buffer);/* Free memory allocated to buffer on failure */
 		return (NULL); /* Return NULL to indicate EOF or error */
 	}
@@ -35,8 +31,8 @@ char *read_command(void)
 	if (command == NULL)
 	{
 		free(buffer);
-		handle_error("malloc");
-		exit(EXIT_FAILURE);
+		handle_error("Memory allocation failed\n");
+		_exit(EXIT_FAILURE);
 	}
 
 	_strcpy(command, buffer);
@@ -44,10 +40,3 @@ char *read_command(void)
 	free(buffer);
 	return (command);
 }
-/**
- * I noticed I had not properly handled memory allocation
- * so I added free buffer where relevant.
- * Also noticed that len was not properly initiated. This helped remove
- * strlen so we only need to handle strcpy.
- *
- */

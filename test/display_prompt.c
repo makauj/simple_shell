@@ -6,5 +6,5 @@
 
 void display_prompt(void)
 {
-	write(STDOUT_FILENO, PROMPT, sizeof(PROMPT) - 1);
+	write(STDOUT_FILENO, PROMPT, _strlen(PROMPT) - 1);
 }

@@ -1,5 +1,9 @@
 #include "main.h"
 
+#ifndef PATH_MAX
+#define PATH_MAX 4096
+#endif
+
 /**
  * _builtins - function to add builtin commands
  * Return: commands
@@ -17,20 +21,21 @@ int _builtins(void)
 void _exit(char **args)
 {
 	int status = 0;
+	int stat_val;
+	const char *msg;
 
 	if (args[1] != NULL)
 	{
-		int stat_val;
 		if (_strtol(args[1], &stat_val) != 0 || stat_val < 0 || stat_val > 255)
 		{
-			const char *msg = "exit: invalid status\n";
+			msg = "exit: invalid status\n";
 			write(STDERR_FILENO, msg, sizeof(msg) - 1);
-			exit(1); /* Exit with failure status */
+			_exit(1); /* Exit with failure status */
 		}
 		status = stat_val;
 	}
 
-	exit(status);
+	_exit(status);
 }
 
 /**
@@ -43,6 +48,7 @@ void _cd(char **args)
 	const char *home_dir = getenv("HOME");
 	const char *oldpwd = getenv("OLDPWD");
 	const char *pwd = getenv("PWD");
+	const char *msg;
 	char current_dir[PATH_MAX];
 	char *target_dir = NULL;
 
@@ -65,25 +71,29 @@ void _cd(char **args)
 	{
 		if (setenv("OLDPWD", pwd, 1) != 0)
 		{
-			perror("cd: failed to set OLDPWD");
+			msg = "cd: failed to set OLDPWD\n";
+			write(STDERR_FILENO, msg, _strlen(msg));
 			return;
 		}
 	}
 
 	if (chdir(target_dir) != 0)
 	{
-		perror("cd");
+		msg = "cd: failed to set OLDPWD\n";
+		write(STDERR_FILENO, msg, _strlen(msg));
 		return;
 	}
 	if (getcwd(current_dir, sizeof(current_dir)) != NULL)
 	{
 		if (setenv("PWD", current_dir, 1) != 0)
 		{
-			perror("cd: failed to set PWD");
+			msg = "cd: failed to set PWD";
+			write(STDERR_FILENO, msg, _strlen(msg));
 		}
 	}
 	else
 	{
-		perror("cd: failed to get current directory");
+		msg = "cd: failed to get current directory";
+		write(STDERR_FILENO, msg, _strlen(msg));
 	}
 }

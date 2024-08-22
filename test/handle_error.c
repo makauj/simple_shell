@@ -7,5 +7,5 @@
 
 void handle_error(const char *msg)
 {
-	perror(msg);
+	write(STDERR_FILENO, msg, _strlen(msg));
 }

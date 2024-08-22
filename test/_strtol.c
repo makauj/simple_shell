@@ -21,12 +21,12 @@ int _strtol(const char *str, int *value)
 
 	while (*str)
 	{
-		if (!isdigit(*str))
+		if (*str < '0' || *str > '0')
 		{
 			return (-1);
 		}
-	result = result * 10 + (*str - '0');
-	str++;
+		result = result * 10 + (*str - '0');
+		str++;
 	}
 
 	*value = sign * result;

@@ -19,7 +19,7 @@ int main(void)
 		{
 			/* Handle end-of-file (Ctrl+D) */
 			print_string("\n");
-			exit(EXIT_SUCCESS);
+			_exit(EXIT_SUCCESS);
 		}
 		/* Ignore empty commands */
 		if (_strlen(command) > 0)

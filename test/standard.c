@@ -37,6 +37,8 @@ int _strlen(char *s)
   */
 int print_string(char *str)
 {
+	const char *msg;
+
 	if (str != NULL)
 	{
 		write(1, str, _strlen(str));
@@ -44,7 +46,8 @@ int print_string(char *str)
 	}
 	else
 	{
-		perror("print string");
+		msg = "print string";
+		write(STDERR_FILENO, msg, _strlen(msg));
 		return (0);
 	}
 }
