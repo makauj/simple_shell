@@ -29,11 +29,22 @@ char *read_command(void);
 void execute_command(char *command);
 void handle_error(const char *msg);
 char *command_path(const char *command);
+int _strtol(const char *str, int *value);
 
 #define PROMPT "#C is fun$ "
 #define BUFFER_SIZE 1024
 #define MAX_ARGS 100
 
 extern char **environ; /* pass environment variables to execve */
+
+struct builtin
+{
+	char *name;
+	void (*func)(char **args);
+};
+
+struct builtin builtins[] = {
+	{"exit", _exit},
+	{"cd", _cd}};
 
 #endif /* __MAIN_H__ */
