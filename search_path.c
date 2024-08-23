@@ -18,6 +18,11 @@ char *search_command(char *command)
 		free_node(head);
 		return (NULL);
 	}
+	if (command == NULL)
+	{
+		free_node(head);
+		return (NULL);
+	}
 	temp = head;
 	while (temp != NULL)
 	{
@@ -28,7 +33,7 @@ char *search_command(char *command)
 		_strcat(path, command);
 		if (access(path, X_OK) == 0)/* check if the file exists and is executable*/
 		{
-			return (strdup(path));
+			return (_strdup(path));
 		}
 		else
 			temp = temp->next;

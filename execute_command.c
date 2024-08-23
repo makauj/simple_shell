@@ -7,12 +7,12 @@
 
 void execute_command(char *command)
 {
-	pid_t pid = fork();
-	int status;
+	char *command1;
 	char *envp[] = {NULL};
 	char *argv[MAX_ARGS];
 	int argc = 0;
 	char *path;
+	char *pathcopy;
 
 	argv[argc] = strtok(command, " ");
 	while (argv[argc] != NULL && argc < MAX_ARGS - 1)
@@ -21,37 +21,35 @@ void execute_command(char *command)
 		argv[argc] = strtok(NULL, " ");
 	}
 	argv[argc] = NULL; /*NULL terminate argument list*/
+	if (argv == NULL)
+		return;
 
-	path = search_command(argv[0]);
-	if (path == NULL)
+	command1 = argv[0];
+	if (strcmp(command1, "env") == 0)
 	{
-		perror("path");
+		print_environ();
 		return;
 	}
-	if (argv[0] == NULL)
+	else if (strcmp(command1, "setenv") == 0)
 	{
+		_setenv(argv[1], argv[2]);
 		return;
 	}
-	if (pid < 0)
+	else if (command1[0] == '/')
 	{
-		handle_error("fork");
-		return;
-	}
-	else if (pid == 0)
-	{
-		/* Child process */
-		execve(path, argv, envp);
-		/* If execvp returns, there was an error */
-		handle_error("execve");
-		exit(EXIT_FAILURE);
+		pathcopy = command1;
+		path = _strdup(pathcopy);
 	}
 	else
 	{
-		/* Parent process */
-		if (waitpid(pid, &status, 0) < 0)
+		path = search_command(command1);
+		if (path == NULL)
 		{
-			handle_error("waitpid");
+			perror("path");
+			return;
 		}
 	}
-	free(path);
+	run_command(path, argv, envp);
+	free (path);
+	return;
 }

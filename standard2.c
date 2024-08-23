@@ -19,3 +19,47 @@ char *_strcat(char *dest, char *src)
 
 	return (dest);
 }
+/**
+  * _strdup - duplicate a string
+  * @str: string to be duplicated
+  * Return: duplicated copy of the string
+  */
+char *_strdup(char *str)
+{
+	char *s;
+	int len = _strlen(str);
+	int i = 0;
+
+	if (str == NULL)
+		return (NULL);
+	s = malloc(sizeof(char) * len + 1);
+	if (s == NULL)
+		return (NULL);
+	while (str[i] != '\0')
+	{
+		s[i] = str[i];
+		i++;
+	}
+	s[len] = '\0';
+	return (s);
+}
+/**
+  * _strncmp - compare n no of characters in a string
+  * @n: Number of characetrs to be compared
+  * @str1: first string
+  * @str2: second string
+  * Return: 0 if the match
+  */
+int _strncmp(char *str1, char *str2, ssize_t n)
+{
+	ssize_t i;
+
+	for (i = 0; i < n && str1[i] != '\0' && str2[i] != '\0'; i++)
+	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+	}
+	if (i < n && (str1[i] == '\0' || str2[i] == '\0'))
+		return (str1[i] - str2[i]);
+	return (0);
+}

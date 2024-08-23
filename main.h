@@ -14,9 +14,12 @@ typedef struct bin
 	char *dir;
 	struct bin *next;
 } bin;
-
-
+char *_strdup(char *str);
+char *_getenv(char *name);
 void free_node(bin *head);
+void print_environ();
+int _setenv(char *name, char *value);
+int _strncmp(char *str1, char *str2, ssize_t n);
 char *search_command(char *command);
 bin *create_node(void);
 char *_strcat(char *dest, char *src);
@@ -29,7 +32,7 @@ char *read_command(void);
 void execute_command(char *command);
 void handle_error(const char *msg);
 char *command_path(const char *command);
-
+int run_command(char *path, char **argv, char **envp);
 #define PROMPT "#C is fun$ "
 #define BUFFER_SIZE 1024
 #define MAX_ARGS 100

@@ -12,10 +12,10 @@ bin *create_node(void)
 	char *path;
 	char *pathcopy;
 
-	path = getenv("PATH");
+	path = _getenv("PATH");
 	if (path == NULL)
 		return (NULL);
-	pathcopy = strdup(path);
+	pathcopy = _strdup(path);
 	if (pathcopy == NULL)
 		return (NULL);
 	token = strtok(pathcopy, ":");
@@ -27,7 +27,7 @@ bin *create_node(void)
 			free(pathcopy);
 			return (NULL);
 		}
-		new_node->dir = strdup(token);
+		new_node->dir = _strdup(token);
 		if (new_node->dir == NULL)
 		{
 			free(new_node);
