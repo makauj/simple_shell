@@ -26,7 +26,7 @@ int _setenv(char *name, char *value)
 	_strcat(new, value);
 	while (environ[i] != NULL)
 	{
-		if (strncmp(environ[i], name, len) == 0 && environ[i][len] == '=')
+		if (_strncmp(environ[i], name, len) == 0 && environ[i][len] == '=')
 		{
 			free(environ[i]);
 			environ[i] = new;

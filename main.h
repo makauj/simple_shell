@@ -18,6 +18,8 @@ char *_strdup(char *str);
 char *_getenv(char *name);
 void free_node(bin *head);
 void print_environ();
+ int _strcmp(char *s1, char *s2);
+int _unsetenv(char *name);
 int _setenv(char *name, char *value);
 int _strncmp(char *str1, char *str2, ssize_t n);
 char *search_command(char *command);

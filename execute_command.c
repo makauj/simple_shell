@@ -25,14 +25,19 @@ void execute_command(char *command)
 		return;
 
 	command1 = argv[0];
-	if (strcmp(command1, "env") == 0)
+	if (_strcmp(command1, "env") == 0)
 	{
 		print_environ();
 		return;
 	}
-	else if (strcmp(command1, "setenv") == 0)
+	else if (_strcmp(command1, "setenv") == 0)
 	{
 		_setenv(argv[1], argv[2]);
+		return;
+	}
+	if (_strcmp(command1, "unsetenv") == 0)
+	{
+		_unsetenv(argv[1]);
 		return;
 	}
 	else if (command1[0] == '/')

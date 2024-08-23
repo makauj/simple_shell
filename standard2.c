@@ -63,3 +63,27 @@ int _strncmp(char *str1, char *str2, ssize_t n)
 		return (str1[i] - str2[i]);
 	return (0);
 }
+
+/**
+ * _strcmp - compares two strings
+ * @s1: first string to be compared
+ * @s2: second string to be compared
+ * Return: 0 if success, the difference of ASCII value of characters if failed
+ */
+
+int _strcmp(char *s1, char *s2)
+{
+	while ((*s1 != '\0' && *s2 != '\0') && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	if (*s1 == *s2)
+	{
+		return (0);
+	}
+	else
+	{
+		return (*s1 - *s2);
+	}
+}
