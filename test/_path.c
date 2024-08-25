@@ -22,7 +22,7 @@ char *command_path(const char *command)
 		exit(EXIT_FAILURE);
 	}
 
-	path_cpy = strdup(path);
+	path_cpy = _strdup(path);
 	if (path_cpy == NULL)
 	{
 		handle_error("strdup");
@@ -47,8 +47,8 @@ char *command_path(const char *command)
 	dir = strtok(path_cpy, ":");
 	while (dir != NULL)
 	{
-		dir_len = _strlen(dir);
-		cmd_len = _strlen(command);
+		dir_len = strlen(dir);
+		cmd_len = strlen(command);
 		total_len = dir_len + cmd_len + 2;
 
 		if (total_len >= sizeof(fp))
@@ -69,7 +69,7 @@ char *command_path(const char *command)
 				if ((sb.st_mode & S_IXUSR))
 				{
 					free(path_cpy);
-					return (_strdup(fp));
+					return (strdup(fp));
 				}
 			}
 		}

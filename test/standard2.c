@@ -26,24 +26,45 @@ char *_strcat(char *dest, char *src)
 
 /**
  * _strdup - function that duplicates strings
- * @str: string
- * 
+ * @s: string
+ *
  * Return: the string copy
  */
 
 char *_strdup(const char *s)
 {
-	size_t len = _strlen(str) + 1;
+	size_t len = _strlen(s) + 1;
 	size_t i;
 	char *copy = malloc(len);
 
 	if (copy == NULL)
 	{
-		return(NULL);
+		return (NULL);
 	}
 	for (i = 0; i < len; i++)
 	{
-		copy[i] = str[i];
+		copy[i] = s[i];
 	}
 	return (copy);
+}
+
+/**
+ * _strlen - Return the length of a string
+ * @s: String
+ * Return: Length of the string
+ */
+int _strlen(const char *s)
+{
+	int length = 0;
+
+	if (s == NULL)
+	{
+		return (0);
+	}
+
+	while (s[length] != '\0')
+	{
+		length++;
+	}
+	return (length);
 }

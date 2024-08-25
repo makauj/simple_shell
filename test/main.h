@@ -11,7 +11,13 @@
 #include <errno.h>
 #include <ctype.h>
 #include <limits.h>
-
+/**
+ * struct bin - definition of bin
+ * @dir: directory
+ * @next: next
+ *
+ * Description: something about bin
+ */
 typedef struct bin
 {
 	char *dir;
@@ -36,25 +42,41 @@ char *_strtok(char *str, const char *delim);
 int _strtol(const char *str, int *value);
 char *_strchr(const char *str, int c);
 int _builtins(void);
-void _exit(char **args);
-void _cd(char **args);
+void my_exit(char **args);
+void my_cd(char **args);
 
 
 #define PROMPT "#C is fun$ "
 #define BUFFER_SIZE 1024
 #define MAX_ARGS 100
-
-	extern char **environ; /* pass environment variables to execve */
-
+#define PATH_MAX 4096
+extern char **environ; /* pass environment variables to execve */
+/**
+ * struct builtin - builtin
+ * @name: name
+ * @func: function
+ *
+ * Description: get builtins initiated
+ */
 struct builtin
 {
 	char *name;
 	void (*func)(char **args);
 };
 
+/**
+ * struct builtin - builtin
+ * builtins - name builtin functions
+ * @exit: custom name for my_exit function
+ * @cd: custom name for my_cd function
+ *
+ * Description: Initializes an array of builtin structures
+ */
 struct builtin builtins[] = {
-	{"exit", _exit},
-	{"cd", _cd}
+	{"exit", my_exit},
+	{"cd", my_cd}
 };
+
+const size_t num_builtins = sizeof(builtins) / sizeof(builtins[0]);
 
 #endif /* __MAIN_H__ */
