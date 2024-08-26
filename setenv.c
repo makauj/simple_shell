@@ -11,8 +11,6 @@ int _setenv(char *name, char *value)
 	int i = 0;
 	int len = _strlen(name);
 
-	if (new == NULL)
-		return(-1);
 	if (name == NULL)
 		return(-1);
 	if (value == NULL)

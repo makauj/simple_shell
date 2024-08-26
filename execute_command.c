@@ -14,11 +14,11 @@ void execute_command(char *command)
 	char *path;
 	char *pathcopy;
 
-	argv[argc] = strtok(command, " ");
+	argv[argc] = _strtok(command, " ");
 	while (argv[argc] != NULL && argc < MAX_ARGS - 1)
 	{
 		argc++;
-		argv[argc] = strtok(NULL, " ");
+		argv[argc] = _strtok(NULL, " ");
 	}
 	argv[argc] = NULL; /*NULL terminate argument list*/
 	if (argv == NULL)
@@ -28,6 +28,17 @@ void execute_command(char *command)
 	if (_strcmp(command1, "env") == 0)
 	{
 		print_environ();
+		return;
+	}
+	/*if (_strcmp(command1, "cd") == 0)
+	{
+		handle_cd(argv);
+		return;
+	}
+	*/
+	if (_strcmp(command1, "exit") == 0)
+	{
+		kill(0, SIGTERM);
 		return;
 	}
 	else if (_strcmp(command1, "setenv") == 0)

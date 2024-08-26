@@ -9,6 +9,8 @@
 int main(void)
 {
 	char *command;
+	bin *head;
+	bin *temp;
 
 	while (1)
 	{
@@ -21,14 +23,22 @@ int main(void)
 			print_string("\n");
 			exit(EXIT_SUCCESS);
 		}
-		/* Ignore empty commands */
-		if (_strlen(command) > 0)
+		/* call a linked list with commands seperated by ;*/
+		head = command_node(command);
+		if (head == NULL)
 		{
-			execute_command(command);
+			perror("head");
+			continue;
+		}
+		temp = head;
+		while (temp != NULL)
+		{
+			execute_command(temp->dir);
+			temp = temp->next;
 		}
 
+		free_node(head);
 		free(command); /* Free the allocated memory */
 	}
-
 	return (0);
 }
