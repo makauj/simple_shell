@@ -108,7 +108,7 @@ ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream)
 {
     if (*lineptr == NULL)
     {
-        *n = 128;  // Initial buffer size
+        *n = 128; // Initial buffer size
         *lineptr = malloc(*n);
         if (*lineptr == NULL)
             return -1;

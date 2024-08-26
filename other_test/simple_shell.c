@@ -1,5 +1,8 @@
 #include "main.h"
 
+/**
+ * 
+ */
 int main(void)
 {
     char *buffer = NULL;
@@ -23,7 +26,7 @@ int main(void)
         if (buffer[0] == '\0')
             continue;
 
-        buffer[custom_strlen(buffer) - 1] = '\0'; /*Remove newline character*/
+        buffer[custom_strlen(buffer) - 1] = '\0'; // Remove newline character
         args = split_line(buffer);
 
         if (handle_builtin_commands(args))
