@@ -9,17 +9,22 @@ bin *command_node(char *command)
 	bin *new_node;
 	char *token;
 	bin *temp = NULL;
+	char *command_copy;
 
 	if (command == NULL)
 		return(NULL);
-	token = strtok(command, ";");
+	command_copy = _strdup(command);
+	if (command_copy == NULL)
+		return (NULL);
+	token = strtok(command_copy, ";|&");
 	while (token != NULL)
 	{
 		new_node = (bin *) malloc(sizeof(bin));
 		if (new_node == NULL)
 			return (NULL);
 		new_node->dir = token;
-	
+		if (new_node->dir == NULL)
+			return (NULL);
 		new_node->next = NULL;
 		if (head == NULL)
 		{
@@ -34,8 +39,9 @@ bin *command_node(char *command)
 			}
 			temp->next = new_node;
 		}
-		token = strtok(NULL, ";");
+		token = strtok(NULL, ";|&");
 
 	}
 	return (head);
+	free(command_copy);
 }

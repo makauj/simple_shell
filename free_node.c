@@ -2,18 +2,20 @@
 /**
   *free_node - free nodes
   * @head: Head of the node
-  * Return: 0
+  * Return: 0 on success, non zero on failure
   */
-void free_node(bin *head)
+int free_node(bin *head)
 {
 	bin *temp;
-	bin *next;
 
+	if (head == NULL)
+		return (-1);
 	temp = head;
 	while (temp != NULL)
 	{
-		next = temp->next;
+		head = temp->next;
 		free(temp);
-		temp = next;
+		temp = head;
 	}
+	return (0);
 }

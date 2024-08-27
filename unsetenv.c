@@ -21,5 +21,5 @@ int _unsetenv(char *name)
 		i++;
 	}
 	print_string("key Not Found!");
-	return (0);
+	return (-1);
 }

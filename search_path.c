@@ -15,7 +15,6 @@ char *search_command(char *command)
 	head = create_node();
 	if (head == NULL)
 	{
-		free_node(head);
 		return (NULL);
 	}
 	if (command == NULL)

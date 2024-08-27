@@ -12,6 +12,8 @@ char *read_command(void)
 	size_t bufsize = 0;
 	char *command;
 	ssize_t len;
+	ssize_t len1 = 0;
+	int i = 0;
 
 	len = getline(&buffer, &bufsize, stdin);
 	if (len == -1)
@@ -23,24 +25,32 @@ char *read_command(void)
 		free(buffer);/* Free memory allocated to buffer on failure */
 		return (NULL); /* Return NULL to indicate EOF or error */
 	}
-
 	/* Remove the newline character from the buffer, if present */
 	if (len > 0 && buffer[len - 1] == '\n')
 	{
 		buffer[len - 1] = '\0';
 	}
 
+
+	while (buffer[i] != '#' && buffer[i] != '\0')
+	{
+		len1++;
+		i++;
+	}
+
 	/* Allocate memory for the command and copy it */
-	command = malloc(len);
+	command = malloc(len1 + 1);
 	if (command == NULL)
 	{
 		free(buffer);
 		handle_error("malloc");
 		exit(EXIT_FAILURE);
 	}
-
-	_strcpy(command, buffer);
-
+	for (i = 0; i < len1; i++)
+	{
+		command[i] = buffer[i];
+	}
+	command[i] = '\0';
 	free(buffer);
 	return (command);
 }

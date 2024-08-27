@@ -21,14 +21,14 @@ int main(void)
 		{
 			/* Handle end-of-file (Ctrl+D) */
 			print_string("\n");
-			exit(EXIT_SUCCESS);
+			exit(0);
 		}
 		/* call a linked list with commands seperated by ;*/
 		head = command_node(command);
 		if (head == NULL)
 		{
 			perror("head");
-			continue;
+			return (-1);
 		}
 		temp = head;
 		while (temp != NULL)
@@ -37,8 +37,8 @@ int main(void)
 			temp = temp->next;
 		}
 
-		free_node(head);
-		free(command); /* Free the allocated memory */
+		free(command);
+		free_node(head); /* Free the allocated memory */
 	}
 	return (0);
 }

@@ -3,9 +3,10 @@
 /**
  * execute_command - function to execute command
  * @command: command to execute
+ * Return: 0 if succesfull and _1 if failed
  */
 
-void execute_command(char *command)
+int execute_command(char *command)
 {
 	char *command1;
 	char *envp[] = {NULL};
@@ -14,42 +15,46 @@ void execute_command(char *command)
 	char *path;
 	char *pathcopy;
 
-	argv[argc] = _strtok(command, " ");
+	argv[argc] = strtok(command, " ");
 	while (argv[argc] != NULL && argc < MAX_ARGS - 1)
 	{
 		argc++;
-		argv[argc] = _strtok(NULL, " ");
+		argv[argc] = strtok(NULL, " ");
 	}
 	argv[argc] = NULL; /*NULL terminate argument list*/
 	if (argv == NULL)
-		return;
+		return(-1);
 
 	command1 = argv[0];
 	if (_strcmp(command1, "env") == 0)
 	{
 		print_environ();
-		return;
+		return(0);
 	}
-	/*if (_strcmp(command1, "cd") == 0)
+	else if(_strcmp(command1, "echo") == 0)
+	{
+		echo(argv[1]);
+		return (0);
+	}
+	/*else if (_strcmp(command1, "cd") == 0)
 	{
 		handle_cd(argv);
 		return;
 	}
 	*/
-	if (_strcmp(command1, "exit") == 0)
+	else if (_strcmp(command1, "exit") == 0)
 	{
-		kill(0, SIGTERM);
-		return;
+		exit(0);
 	}
 	else if (_strcmp(command1, "setenv") == 0)
 	{
 		_setenv(argv[1], argv[2]);
-		return;
+		return(0);
 	}
-	if (_strcmp(command1, "unsetenv") == 0)
+	else if (_strcmp(command1, "unsetenv") == 0)
 	{
 		_unsetenv(argv[1]);
-		return;
+		return(0);
 	}
 	else if (command1[0] == '/')
 	{
@@ -62,10 +67,10 @@ void execute_command(char *command)
 		if (path == NULL)
 		{
 			perror("path");
-			return;
+			return(-1);
 		}
 	}
 	run_command(path, argv, envp);
 	free (path);
-	return;
+	return(0);
 }
