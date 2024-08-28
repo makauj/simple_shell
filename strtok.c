@@ -5,12 +5,14 @@
 char *_strtok(char *str, const char *delim)
 {
     static char *saved_str;
+    char *start;
+
     if (str)
         saved_str = str;
     if (!saved_str || *saved_str == '\0')
         return NULL;
 
-    char *start = saved_str;
+    start = saved_str;
     while (*saved_str)
     {
         const char *d = delim;
