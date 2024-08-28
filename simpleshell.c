@@ -17,12 +17,12 @@ int main(void)
 		display_prompt();
 		command = read_command();
 
-		if (command == NULL)
+		if (command == NULL || _strlen(command) == 0 || _strcmp(command, "\n") == 0)
 		{
-			/* Handle end-of-file (Ctrl+D) */
-			print_string("\n");
-			exit(0);
+			free(command);
+			continue;
 		}
+
 		/* call a linked list with commands seperated by ;*/
 		head = command_node(command);
 		if (head == NULL)
