@@ -1,6 +1,7 @@
 #include "main.h"
 /**
- * Function to handle the cd built-in command
+ * handle_cd - Function to handle the cd built-in command
+ * @args: arguments
  */
 void handle_cd(char **args)
 {

@@ -1,7 +1,8 @@
 #include "main.h"
 
 /**
- * 
+ * main - entry to shell command
+ * Return: 0
  */
 int main(void)
 {

@@ -21,7 +21,7 @@ int execute_command(char *command)
 		argc++;
 		argv[argc] = strtok(NULL, " ");
 	}
-	argv[argc] = NULL; /*NULL terminate argument list*/
+	argv[argc] = NULL;
 	if (argv == NULL)
 		return(-1);
 
@@ -36,12 +36,11 @@ int execute_command(char *command)
 		echo(argv[1]);
 		return (0);
 	}
-	/*else if (_strcmp(command1, "cd") == 0)
+	else if (_strcmp(command1, "cd") == 0)
 	{
 		handle_cd(argv);
 		return;
 	}
-	*/
 	else if (_strcmp(command1, "exit") == 0)
 	{
 		exit(0);

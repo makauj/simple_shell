@@ -7,7 +7,7 @@
 void display_prompt(void)
 {
     if (isatty(STDIN_FILENO))
-        write(STDOUT_FILENO, "#C is fun$ ", 14);
+        write(STDOUT_FILENO, "#C is fun$ ", 12);
 }
 
 /**
