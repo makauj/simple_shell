@@ -11,11 +11,22 @@
 #include <string.h>
 #include <signal.h>
 #include <errno.h>
+
+/**
+  * struct bin - linked list to store directories
+  * @dir: directory path
+  * @next: pointer to the next node in the list
+  * Description: This structure is used to create a linked list
+  * to store directory paths for command searching.
+  * It allows for dynamic storage of directories that can be
+  * traversed and manipulated as needed.
+  */
 typedef struct bin
 {
 	char *dir;
 	struct bin *next;
 } bin;
+
 char *_strdup(char *str);
 char *_strchr(char *s, char c);
 char *_getenv(char *name);
