@@ -1,10 +1,16 @@
 #include "main.h"
+#include <unistd.h>
+#include <stdio.h>
 
 /**
- * display_prompt - function to handle display
+ * display_prompt - print shell prompt only for interactive sessions
  */
-
 void display_prompt(void)
 {
-	write(STDOUT_FILENO, PROMPT, sizeof(PROMPT) - 1);
+    /* print prompt only when stdin is a terminal */
+    if (!isatty(STDIN_FILENO))
+        return;
+
+    printf("($) ");
+    fflush(stdout);
 }

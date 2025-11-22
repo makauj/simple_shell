@@ -54,6 +54,7 @@ int execute_command(char *command);
 void handle_error(const char *msg);
 char *command_path(const char *command);
 int run_command(char *path, char **argv, char **envp);
+
 #define PROMPT "($) "
 #define BUFFER_SIZE 1024
 #define MAX_ARGS 100
