@@ -6,20 +6,9 @@
   */
 int _unsetenv(char *name)
 {
-	int i = 0;
-	int len = _strlen(name);
-
 	if (name == NULL)
 		return (-1);
-	while (environ[i] != NULL)
-	{
-		if (_strncmp(environ[i], name, len) == 0 && environ[i][len] == '=')
-		{
-			free(environ[i]);
-			return (0);
-		}
-		i++;
-	}
-	print_string("key Not Found!");
-	return (-1);
+	if (name[0] == '\0' || _strchr(name, '=') != NULL)
+		return (-1);
+	return (unsetenv(name));
 }

@@ -19,7 +19,7 @@ bin *command_node(char *command)
     if (command_copy == NULL)
         return (NULL);
 
-    token = strtok(command_copy, ";|&");
+    token = strtok(command_copy, ";");
     while (token != NULL)
     {
         new_node = malloc(sizeof(bin));
@@ -56,7 +56,7 @@ bin *command_node(char *command)
             temp = temp->next;
         }
 
-        token = strtok(NULL, ";|&");
+        token = strtok(NULL, ";");
     }
 
     /* tokens were duplicated; free the temporary copy buffer */

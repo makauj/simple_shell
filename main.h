@@ -1,6 +1,10 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
+
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -58,7 +62,6 @@ int run_command(char *path, char **argv, char **envp);
 #define PROMPT "($) "
 #define BUFFER_SIZE 1024
 #define MAX_ARGS 100
-#define _GNU_SOURCE
 extern char **environ; /* pass environment variables to execve */
 
 #endif /* __MAIN_H__ */

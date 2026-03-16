@@ -24,6 +24,7 @@ bin *create_node(void)
 		new_node = (bin *)malloc(sizeof(bin));
 		if (new_node == NULL)
 		{
+			free_node(head);
 			free(pathcopy);
 			return (NULL);
 		}
@@ -31,6 +32,7 @@ bin *create_node(void)
 		if (new_node->dir == NULL)
 		{
 			free(new_node);
+			free_node(head);
 			free(pathcopy);
 			return (NULL);
 		}

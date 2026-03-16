@@ -20,6 +20,12 @@ int echo(char *argv)
 		return (-1);
 	temp = argv;
 	var = _strchr(temp, '$');
+	if (var == NULL)
+	{
+		print_string(argv);
+		_putchar('\n');
+		return (0);
+	}
 	var = var + 1;
 
 	if (*var == '\0')
@@ -69,7 +75,7 @@ int echo(char *argv)
 		{
 			if (_strncmp(environ[i], key, len) == 0 && environ[i][len] == '=')
 			{
-				print_string(environ[i] + len + 2);
+				print_string(environ[i] + len + 1);
 				_putchar('\n');
 				free(key);
 				return (0);

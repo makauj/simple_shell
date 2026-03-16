@@ -8,9 +8,9 @@
 int execute_command(char *command)
 {
     char *command1;
-    char *envp[] = {NULL};
     char **argv;
     int argc = 0;
+    int status;
     char *path = NULL;
     char *token;
 
@@ -87,15 +87,16 @@ int execute_command(char *command)
         path = search_command(command1);
         if (path == NULL)
         {
-            perror("path");
+            print_string(command1);
+            print_string(": command not found\n");
             free(argv);
             return (-1);
         }
     }
 
-    run_command(path, argv, envp);
+    status = run_command(path, argv, environ);
 
     free(path);
     free(argv);
-    return (0);
+    return (status);
 }

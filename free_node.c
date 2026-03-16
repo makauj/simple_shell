@@ -14,6 +14,7 @@ int free_node(bin *head)
 	while (temp != NULL)
 	{
 		head = temp->next;
+		free(temp->dir);
 		free(temp);
 		temp = head;
 	}

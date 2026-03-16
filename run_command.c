@@ -11,7 +11,7 @@ int run_command(char *path, char **argv, char **envp)
 	int st = 0;
 	pid_t pid;
 
-	if (path == NULL && argv ==NULL && envp == NULL)
+	if (path == NULL || argv == NULL || envp == NULL)
 		return (-1);
 	pid = fork();
 	if (pid < 0)
@@ -22,6 +22,8 @@ int run_command(char *path, char **argv, char **envp)
 	if (pid == 0)
 	{
 		execve(path, argv, envp);
+		perror("execve");
+		_exit(127);
 	}
 	else
 	{
@@ -30,6 +32,10 @@ int run_command(char *path, char **argv, char **envp)
 			perror("waitpid");
 			return (-1);
 		}
+		if (WIFEXITED(st) && WEXITSTATUS(st) != 0)
+			return (WEXITSTATUS(st));
+		if (WIFSIGNALED(st))
+			return (-1);
 	}
 	return (0);
 }

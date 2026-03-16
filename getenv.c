@@ -7,11 +7,12 @@
 
 char *_getenv(char *name)
 {
-	size_t len = _strlen(name);
+	size_t len;
 	int i = 0;
 
 	if (name == NULL)
 		return (NULL);
+	len = _strlen(name);
 	while (environ[i] != NULL)
 	{
 		if (_strncmp(name, environ[i], len) == 0 && environ[i][len] == '=')
@@ -20,6 +21,5 @@ char *_getenv(char *name)
 		}
 		i++;
 	}
-	print_string("Not found");
 	return (NULL);
 }

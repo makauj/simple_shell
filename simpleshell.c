@@ -17,7 +17,11 @@ int main(void)
 		display_prompt();
 		command = read_command();
 
-		if (command == NULL || _strlen(command) == 0 || _strcmp(command, "\n") == 0)
+		/* EOF (Ctrl+D): exit shell loop cleanly */
+		if (command == NULL)
+			break;
+
+		if (_strlen(command) == 0 || _strcmp(command, "\n") == 0)
 		{
 			free(command);
 			continue;
@@ -28,6 +32,7 @@ int main(void)
 		if (head == NULL)
 		{
 			perror("head");
+			free(command);
 			return (-1);
 		}
 		temp = head;
