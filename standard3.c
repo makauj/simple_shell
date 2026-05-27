@@ -1,7 +1,11 @@
 #include "main.h"
 
 /**
- * Custom strncpy function
+ * -_strncpy - copies a string up to n characters
+ * @dest: destination buffer
+ * @src: source string
+ * @n: maximum number of characters to copy
+ * Return: pointer to destination buffer
  */
 char *_strncpy(char *dest, const char *src, size_t n)
 {

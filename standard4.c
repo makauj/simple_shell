@@ -21,8 +21,8 @@ char *_strcpy(char *dest, char *src)
 /**
  * _strchr - locates a character in a string
  * @s: string to be searched
- * @c: charater to be located
- *Return: if successful, pointer to first occurence of character c
+ * @c: character to be located
+ * Return: if successful, pointer to first occurence of character c
  */
 
 char *_strchr(char *s, char c)

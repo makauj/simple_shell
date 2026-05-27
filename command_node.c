@@ -1,6 +1,7 @@
 #include "main.h"
 /**
   * command_node - create a linked list containing the commands
+  * @command: string command retrieved from the user
   * Return: head of the linked list
   */
 bin *command_node(char *command)

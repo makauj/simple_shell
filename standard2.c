@@ -19,9 +19,9 @@ char *_strcat(char *dest, char *src)
 }
 /**
   * _strncmp - compare n no of characters in a string
-  * @n: Number of characetrs to be compared
   * @str1: first string
   * @str2: second string
+  * @n: Number of characetrs to be compared
   * Return: 0 if the match
   */
 int _strncmp(char *str1, char *str2, ssize_t n)

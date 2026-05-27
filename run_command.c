@@ -1,9 +1,9 @@
 #include "main.h"
 /**
   * run_command - execute a command in a child process
-  * @argv: arguments
-  * @path: path
-  * @envp: environment
+  * @path: path to the command
+  * @argv: arguments for the command
+  * @envp: environment variables
   * Return: 0 on success, -1 on failure
   */
 int run_command(char *path, char **argv, char **envp)
