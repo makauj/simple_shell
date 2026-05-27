@@ -44,6 +44,7 @@ int print_string(char *str);
 int _putchar(char c);
 int _strlen(char *s);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+int _fgetc(FILE *stream);
 void display_prompt(void);
 char *read_command(void);
 int execute_command(char *command);

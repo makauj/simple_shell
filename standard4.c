@@ -93,3 +93,22 @@ char *_strtok(char *str, const char *delim)
     saved_str = NULL;
     return (start);
 }
+
+/**
+ * _fgetc - custom implementation of fgetc function
+ * @stream: input stream to read from
+ * Return: the character read, or EOF on failure
+ */
+int _fgetc(FILE *stream)
+{    char c;
+    size_t bytesRead;
+
+    if (stream == NULL)
+        return (EOF);
+
+    bytesRead = fread(&c, 1, 1, stream);
+    if (bytesRead == 1)
+        return (c);
+    else
+        return (EOF);
+}

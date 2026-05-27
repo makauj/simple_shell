@@ -67,7 +67,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	}
 
 	character = EOF;
-	while ((character = fgetc(stream)) != EOF)
+	while ((character = _fgetc(stream)) != EOF)
 	{
 		if (position + 1 >= *n)
 		{
