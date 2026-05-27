@@ -1,6 +1,7 @@
 #include "main.h"
 /**
-  * create_node - create a linked list with directories from "path"in the environ variable
+  * create_node - create a linked list with directories from "path"in
+  * the environ variable
   * Return: the head of the linked list
   */
 bin *create_node(void)

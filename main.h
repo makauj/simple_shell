@@ -43,6 +43,7 @@ char *_strcpy(char *dest, char *src);
 int print_string(char *str);
 int _putchar(char c);
 int _strlen(char *s);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void display_prompt(void);
 char *read_command(void);
 int execute_command(char *command);
@@ -53,6 +54,6 @@ int run_command(char *path, char **argv, char **envp);
 #define PROMPT "($) "
 #define BUFFER_SIZE 1024
 #define MAX_ARGS 100
-extern char **environ; /* pass environment variables to execve */
+extern char **environ;
 
 #endif /* __MAIN_H__ */
