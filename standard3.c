@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * Custom strncpy function
  */
@@ -12,4 +13,21 @@ char *_strncpy(char *dest, const char *src, size_t n)
     return dest;
 }
 
-
+/**
+ * print_string - prints a string
+ * @str: string to be printed
+ * Return: Number of characters
+ */
+int print_string(char *str)
+{
+	if (str != NULL)
+	{
+		write(1, str, _strlen(str));
+		return (_strlen(str));
+	}
+	else
+	{
+		perror("print string");
+		return (0);
+	}
+}

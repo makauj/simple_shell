@@ -1,18 +1,22 @@
 #include "main.h"
 /**
-  * _putchar - print a character
-  * @c: character to be printed
-  * Return: 1 on success
-  */
-int _putchar(char c)
+ * _strcmp - compares two strings
+ * @s1: first string to be compared
+ * @s2: second string to be compared
+ * Return: 0 if success, the difference of ASCII value of characters if failed
+ */
+int _strcmp(char *s1, char *s2)
 {
-	if (c != '\0')
-	{
-		write(1, &c, 1);
-		return (1);
+	while ((*s1 != '\0' && *s2 != '\0') && *s1 == *s2) {
+		s1++;
+		s2++;
 	}
-	else
+	if (*s1 == *s2) {
 		return (0);
+	}
+	else {
+		return (*s1 - *s2);
+	}
 }
 /**
   *_strlen - returns the lenght of the string
@@ -31,61 +35,4 @@ int _strlen(char *s)
 		s++;
 	}
 	return (length);
-}
-/**
-  * print_string - prints a string
-  * @str: string to be printed
-  * Return: Number of characters
-  */
-int print_string(char *str)
-{
-	if (str != NULL)
-	{
-		write(1, str, _strlen(str));
-		return (_strlen(str));
-	}
-	else
-	{
-		perror("print string");
-		return (0);
-	}
-}
-/**
- * *_strcpy - copies the string pointed to by src
- * @dest: value to evaluate
- * @src: value to evaluate
- * Return: the pointer to dest
- */
-
-char *_strcpy(char *dest, char *src)
-{
-	int i = 0;
-
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-/**
- * _strchr - locates a character in a string
- * @s: string to be searched
- * @c: charater to be located
- *Return: if successful, pointer to first occurence of character c
- */
-
-char *_strchr(char *s, char c)
-{
-	int i;
-
-	if (s == NULL)
-		return (NULL);
-	for (i = 0; s[i] >= '\0'; i++)
-	{
-		if (s[i] == c)
-			return (&s[i]);
-	}
-	return (0);
 }
