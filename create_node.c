@@ -19,7 +19,7 @@ bin *create_node(void)
 	pathcopy = _strdup(path);
 	if (pathcopy == NULL)
 		return (NULL);
-	token = strtok(pathcopy, ":");
+	token = _strtok(pathcopy, ":");
 	while (token != NULL)
 	{
 		new_node = (bin *)malloc(sizeof(bin));
@@ -49,7 +49,7 @@ bin *create_node(void)
 			}
 			temp->next = new_node;
 		}
-		token = strtok(NULL, ":");
+		token = _strtok(NULL, ":");
 	}
 	free(pathcopy);
 	return (head);

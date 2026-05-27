@@ -21,11 +21,11 @@ int execute_command(char *command)
     if (argv == NULL)
         return (-1);
 
-    token = strtok(command, " ");
+    token = _strtok(command, " \t");
     while (token != NULL && argc < MAX_ARGS - 1)
     {
         argv[argc++] = token;
-        token = strtok(NULL, " ");
+        token = _strtok(NULL, " \t");
     }
     argv[argc] = NULL;
 

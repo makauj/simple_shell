@@ -49,21 +49,44 @@ int _putchar(char c) {
 
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
-    char *buffer;
-    size_t bufsize = 0;
-    ssize_t len;
+	size_t bufsize;
+	size_t position = 0;
+	char *new_line;
+	int character;
 
-    if (lineptr == NULL || n == NULL || stream == NULL)
-        return (-1);
+	if (lineptr == NULL || n == NULL || stream == NULL)
+		return (-1);
 
-    len = getline(&buffer, &bufsize, stream);
-    if (len == -1)
-    {
-        free(buffer);
-        return (-1);
-    }
+	bufsize = (*lineptr != NULL && *n > 0) ? *n : 128;
+	if (*lineptr == NULL || *n == 0)
+	{
+		*lineptr = malloc(bufsize);
+		if (*lineptr == NULL)
+			return (-1);
+		*n = bufsize;
+	}
 
-    *lineptr = buffer;
-    *n = bufsize;
-    return (len);
+	character = EOF;
+	while ((character = fgetc(stream)) != EOF)
+	{
+		if (position + 1 >= *n)
+		{
+			bufsize = *n * 2;
+			new_line = realloc(*lineptr, bufsize);
+			if (new_line == NULL)
+				return (-1);
+			*lineptr = new_line;
+			*n = bufsize;
+		}
+
+		(*lineptr)[position++] = (char)character;
+		if (character == '\n')
+			break;
+	}
+
+	if (character == EOF && position == 0)
+		return (-1);
+
+	(*lineptr)[position] = '\0';
+	return ((ssize_t)position);
 }

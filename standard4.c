@@ -47,35 +47,49 @@ char *_strchr(char *s, char c)
  */
 char *_strtok(char *str, const char *delim)
 {
-    static char *saveptr;
-    char *token;
+    static char *saved_str;
+    char *start;
+    const char *d;
 
     if (str != NULL)
-        saveptr = str;
-    else if (saveptr == NULL)
+        saved_str = str;
+    if (saved_str == NULL)
         return (NULL);
 
-    token = saveptr;
-    while (*token && strchr(delim, *token))
-        token++;
-
-    if (*token == '\0')
+    while (*saved_str != '\0')
     {
-        saveptr = NULL;
+        d = delim;
+
+        while (*d != '\0' && *saved_str != *d)
+            d++;
+        if (*d == '\0')
+            break;
+        saved_str++;
+    }
+
+    if (*saved_str == '\0')
+    {
+        saved_str = NULL;
         return (NULL);
     }
 
-    saveptr = token + 1;
-    while (*saveptr && !strchr(delim, *saveptr))
-        saveptr++;
-
-    if (*saveptr)
+    start = saved_str;
+    while (*saved_str != '\0')
     {
-        *saveptr = '\0';
-        saveptr++;
-    }
-    else
-        saveptr = NULL;
+        d = delim;
 
-    return (token);
+        while (*d != '\0')
+        {
+            if (*saved_str == *d)
+            {
+                *saved_str = '\0';
+                saved_str++;
+                return (start);
+            }
+            d++;
+        }
+        saved_str++;
+    }
+    saved_str = NULL;
+    return (start);
 }

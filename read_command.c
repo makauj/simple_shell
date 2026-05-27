@@ -15,7 +15,7 @@ char *read_command(void)
 	ssize_t len1 = 0;
 	int i = 0;
 
-	len = getline(&buffer, &bufsize, stdin);
+	len = _getline(&buffer, &bufsize, stdin);
 	if (len == -1)
 	{
 		free(buffer);

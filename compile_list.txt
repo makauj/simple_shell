@@ -15,5 +15,6 @@ setenv.c
 standard2.c
 standard3.c
 standard.c
+standard5.c
 strtok.c
 unsetenv.c
