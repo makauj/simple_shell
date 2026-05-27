@@ -38,3 +38,44 @@ char *_strchr(char *s, char c)
 	}
 	return (0);
 }
+
+/**
+ * _strtok - tokenizes a string based on a delimiter
+ * @str: string to be tokenized
+ * @delim: delimiter to be used for tokenization
+ * Return: pointer to the next token, or NULL if there are no more tokens
+ */
+char *_strtok(char *str, const char *delim)
+{
+    static char *saveptr;
+    char *token;
+
+    if (str != NULL)
+        saveptr = str;
+    else if (saveptr == NULL)
+        return (NULL);
+
+    token = saveptr;
+    while (*token && strchr(delim, *token))
+        token++;
+
+    if (*token == '\0')
+    {
+        saveptr = NULL;
+        return (NULL);
+    }
+
+    saveptr = token + 1;
+    while (*saveptr && !strchr(delim, *saveptr))
+        saveptr++;
+
+    if (*saveptr)
+    {
+        *saveptr = '\0';
+        saveptr++;
+    }
+    else
+        saveptr = NULL;
+
+    return (token);
+}
