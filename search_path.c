@@ -8,12 +8,9 @@
   */
 char *search_command(char *command)
 {
-	bin *head;
-	bin *temp;
-	char *path;
-	char *result;
-	int dir_len;
-	int cmd_len;
+	bin *head, *temp;
+	char *path, *result;
+	int dir_len, cmd_len;
 
 	head = create_node();
 	if (head == NULL)
