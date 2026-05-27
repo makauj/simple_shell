@@ -58,23 +58,8 @@ int main(int argc, char **argv)
 				free(command);
 				continue;
 			}
-
-			head = command_node(command);
-			if (head == NULL)
-			{
-				free(command);
-				free(buffer);
-				fclose(fp);
-				return (-1);
-			}
-			temp = head;
-			while (temp != NULL)
-			{
-				execute_command(temp->dir);
-				temp = temp->next;
-			}
+			execute_command(command);
 			free(command);
-			free_node(head);
 		}
 		free(buffer);
 		fclose(fp);

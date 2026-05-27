@@ -16,5 +16,6 @@ standard2.c
 standard3.c
 standard.c
 standard5.c
+standard4.c
 simpleshell.c
 unsetenv.c

@@ -100,15 +100,16 @@ char *_strtok(char *str, const char *delim)
  * Return: the character read, or EOF on failure
  */
 int _fgetc(FILE *stream)
-{    char c;
-    size_t bytesRead;
+{
+	char c;
+	ssize_t bytes_read;
 
-    if (stream == NULL)
-        return (EOF);
+	if (stream == NULL)
+		return (EOF);
 
-    bytesRead = fread(&c, 1, 1, stream);
-    if (bytesRead == 1)
-        return (c);
-    else
-        return (EOF);
+	bytes_read = read(fileno(stream), &c, 1);
+	if (bytes_read == 1)
+		return ((unsigned char)c);
+
+	return (EOF);
 }
